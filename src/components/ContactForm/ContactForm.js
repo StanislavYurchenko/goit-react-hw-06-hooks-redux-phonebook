@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../redux/phoneBook/phoneBook-actions';
-import PropTypes from 'prop-types';
+import { addContact } from '../../redux/phoneBook/phoneBook-actions';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './ContactForm.module.css';
@@ -44,9 +43,7 @@ function ContactForm() {
     if (!normalizedName) {
       return toast.error('Enter contact name');
     }
-    dispatch(
-      actions.addContact({ name: normalizedName, number, id: uuidv4() }),
-    );
+    dispatch(addContact({ name: normalizedName, number, id: uuidv4() }));
     reset();
   };
 
@@ -81,16 +78,5 @@ function ContactForm() {
     </form>
   );
 }
-
-ContactForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
-  contacts: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string,
-    }),
-  ),
-};
 
 export default ContactForm;

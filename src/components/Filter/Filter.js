@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../redux/phoneBook/phoneBook-actions';
-import PropTypes from 'prop-types';
+import { onChangeFilter } from '../../redux/phoneBook/phoneBook-actions';
 import styles from './Filter.module.css';
 
 function Filter() {
@@ -13,7 +12,7 @@ function Filter() {
       <div className={styles.description}>Find contacts by name</div>
       <input
         className={styles.input}
-        onChange={event => dispatch(actions.onChangeFilter(event.target.value))}
+        onChange={event => dispatch(onChangeFilter(event.target.value))}
         value={filter}
         name="filter"
         type="text"
@@ -21,10 +20,5 @@ function Filter() {
     </>
   );
 }
-
-Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
-  onChangeFilter: PropTypes.func.isRequired,
-};
 
 export default Filter;
