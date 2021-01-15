@@ -1,16 +1,5 @@
-import actionTypes from './counter-types';
+import { createAction } from '@reduxjs/toolkit';
 
-export const removeContactById = id => ({
-  type: actionTypes.REMOVE_CONTACT,
-  payload: id,
-});
-
-export const addContact = newContact => ({
-  type: actionTypes.ADD_CONTACT,
-  payload: newContact,
-});
-
-export const onChangeFilter = value => ({
-  type: actionTypes.FILTER_CONTACTS,
-  payload: value,
-});
+export const removeContactById = createAction('phoneBook/removeContactById');
+export const addContact = createAction('phoneBook/addContact');
+export const onChangeFilter = createAction('phoneBook/onChangeFilter');

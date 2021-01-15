@@ -5,14 +5,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import ContactForm from '../ContactForm/ContactForm';
 import Filter from '../Filter/Filter';
 import ContactList from '../ContactList/ContactList';
-import { setContacts } from '../../api/localStorageApi';
 import styles from './PhoneBook.module.css';
 
 function PhoneBook({ contacts }) {
-  useEffect(() => {
-    setContacts(contacts);
-  }, [contacts]);
-
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Phone book</h1>

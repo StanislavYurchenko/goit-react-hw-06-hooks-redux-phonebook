@@ -37,7 +37,6 @@ ContactList.propTypes = {
     }),
   ),
   filter: PropTypes.string.isRequired,
-  removeContactById: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
