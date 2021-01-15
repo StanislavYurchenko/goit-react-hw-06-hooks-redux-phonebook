@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../redux/phoneBook/phoneBook-actions';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './ContactForm.module.css';
 
-function ContactForm({ addContact, contacts }) {
+function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const contacts = useSelector(state => state.phoneBook.contacts);
+  const dispatch = useDispatch();
 
   const onChange = event => {
     const { name, value } = event.target;
@@ -41,7 +44,9 @@ function ContactForm({ addContact, contacts }) {
     if (!normalizedName) {
       return toast.error('Enter contact name');
     }
-    addContact({ name: normalizedName, number, id: uuidv4() });
+    dispatch(
+      actions.addContact({ name: normalizedName, number, id: uuidv4() }),
+    );
     reset();
   };
 
@@ -88,12 +93,4 @@ ContactForm.propTypes = {
   ),
 };
 
-const mapStateToProps = state => ({
-  contacts: state.phoneBook.contacts,
-});
-
-const mapDispatchToProps = dispatch => ({
-  addContact: newContact => dispatch(actions.addContact(newContact)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
+export default ContactForm;

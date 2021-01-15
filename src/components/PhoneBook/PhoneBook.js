@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ContactForm from '../ContactForm/ContactForm';
@@ -7,7 +7,9 @@ import Filter from '../Filter/Filter';
 import ContactList from '../ContactList/ContactList';
 import styles from './PhoneBook.module.css';
 
-function PhoneBook({ contacts }) {
+function PhoneBook() {
+  const contacts = useSelector(state => state.phoneBook.contacts);
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Phone book</h1>
@@ -26,8 +28,4 @@ function PhoneBook({ contacts }) {
   );
 }
 
-const mapStateToProps = state => ({
-  contacts: state.phoneBook.contacts,
-});
-
-export default connect(mapStateToProps, null)(PhoneBook);
+export default PhoneBook;

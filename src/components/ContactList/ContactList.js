@@ -1,10 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import ContactListItem from '../ContactListItem/ContactListItem';
 import styles from './ContactList.module.css';
 
-function ContactList({ contacts, filter }) {
+function ContactList() {
+  const contacts = useSelector(state => state.phoneBook.contacts);
+  const filter = useSelector(state => state.phoneBook.filter);
+
   const filteredContacts = filter
     ? contacts.filter(contact =>
         contact.name.toLowerCase().trim().includes(filter.toLowerCase().trim()),
@@ -39,9 +42,4 @@ ContactList.propTypes = {
   filter: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => ({
-  contacts: state.phoneBook.contacts,
-  filter: state.phoneBook.filter,
-});
-
-export default connect(mapStateToProps, null)(ContactList);
+export default ContactList;
