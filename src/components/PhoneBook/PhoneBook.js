@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../redux/phoneBook/phoneBook-actions';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ContactForm from '../ContactForm/ContactForm';
@@ -9,14 +8,14 @@ import ContactList from '../ContactList/ContactList';
 import { setContacts } from '../../api/localStorageApi';
 import styles from './PhoneBook.module.css';
 
-function PhoneBook({ contacts, onChangeFilter, filter }) {
+function PhoneBook({ contacts }) {
   useEffect(() => {
     setContacts(contacts);
   }, [contacts]);
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Phonebook</h1>
+      <h1 className={styles.title}>Phone book</h1>
       <ContactForm />
 
       {contacts?.length > 0 && (
@@ -34,13 +33,6 @@ function PhoneBook({ contacts, onChangeFilter, filter }) {
 
 const mapStateToProps = state => ({
   contacts: state.phoneBook.contacts,
-  filter: state.phoneBook.filter,
 });
 
-const mapDispatchToProps = dispatch => ({
-  removeContactById: id => dispatch(actions.removeContactById(id)),
-  addContact: newContact => dispatch(actions.addContact(newContact)),
-  onChangeFilter: event => dispatch(actions.onChangeFilter(event.target.value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PhoneBook);
+export default connect(mapStateToProps, null)(PhoneBook);

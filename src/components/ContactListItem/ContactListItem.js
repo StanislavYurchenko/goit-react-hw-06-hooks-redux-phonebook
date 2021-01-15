@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../redux/phoneBook/phoneBook-actions';
 import PropTypes from 'prop-types';
 import styles from './ContactListItem.module.css';
 
-function ContactListItem({ contact, removeContact }) {
+function ContactListItem({ contact, removeContactById }) {
   return (
     <li className={styles.contact}>
       <div>
@@ -12,7 +14,7 @@ function ContactListItem({ contact, removeContact }) {
 
       <button
         className={styles['remove-btn']}
-        onClick={() => removeContact(contact.id)}
+        onClick={() => removeContactById(contact.id)}
       >
         Delete
       </button>
@@ -26,8 +28,11 @@ ContactListItem.propTypes = {
     name: PropTypes.string.isRequired,
     number: PropTypes.string,
   }),
-
-  removeContact: PropTypes.func.isRequired,
+  removeContactById: PropTypes.func.isRequired,
 };
 
-export default ContactListItem;
+const mapDispatchToProps = dispatch => ({
+  removeContactById: id => dispatch(actions.removeContactById(id)),
+});
+
+export default connect(null, mapDispatchToProps)(ContactListItem);

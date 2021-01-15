@@ -1,36 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../redux/phoneBook/phoneBook-actions';
 import PropTypes from 'prop-types';
 import ContactListItem from '../ContactListItem/ContactListItem';
 import styles from './ContactList.module.css';
 
-function ContactList({ contacts, filter, removeContactById }) {
+function ContactList({ contacts, filter }) {
+  const filteredContacts = filter
+    ? contacts.filter(contact =>
+        contact.name.toLowerCase().trim().includes(filter.toLowerCase().trim()),
+      )
+    : contacts;
+
   return (
     <>
       <ul className={styles.contacts}>
-        {filter
-          ? contacts
-              .filter(contact =>
-                contact.name
-                  .toLowerCase()
-                  .trim()
-                  .includes(filter.toLowerCase().trim()),
-              )
-              .map(contact => (
-                <ContactListItem
-                  key={contact.id}
-                  contact={contact}
-                  removeContact={removeContactById}
-                />
-              ))
-          : contacts.map(contact => (
-              <ContactListItem
-                key={contact.id}
-                contact={contact}
-                removeContact={removeContactById}
-              />
-            ))}
+        {filteredContacts.map(contact => (
+          <ContactListItem key={contact.id} contact={contact} />
+        ))}
       </ul>
     </>
   );
@@ -59,9 +45,4 @@ const mapStateToProps = state => ({
   filter: state.phoneBook.filter,
 });
 
-const mapDispatchToProps = dispatch => ({
-  removeContactById: id => dispatch(actions.removeContactById(id)),
-  addContact: newContact => dispatch(actions.addContact(newContact)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+export default connect(mapStateToProps, null)(ContactList);
