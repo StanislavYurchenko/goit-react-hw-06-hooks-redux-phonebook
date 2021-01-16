@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from '../../redux/phoneBook/phoneBook-actions';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
+import { getContacts } from '../../redux/phoneBook/phoneBook-selectors';
 import styles from './ContactForm.module.css';
 
 function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(state => state.phoneBook.contacts);
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const onChange = event => {
@@ -69,7 +70,7 @@ function ContactForm() {
         name="number"
         value={number}
         onChange={onChange}
-        type="text"
+        type="number"
       />
 
       <button className={styles['remove-btn']} type="submit">
