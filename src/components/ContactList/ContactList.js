@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import ContactListItem from '../ContactListItem/ContactListItem';
-import { getFilteredContacts } from '../../redux/phoneBook/phoneBook-selectors';
+import ContactListItem from 'components/ContactListItem/ContactListItem';
+import { getFilteredContacts } from 'redux/phoneBook/phoneBook-selectors';
 import styles from './ContactList.module.css';
 
 function ContactList() {

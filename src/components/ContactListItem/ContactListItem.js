@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { removeContactById } from '../../redux/phoneBook/phoneBook-actions';
+import { removeContactById } from 'redux/phoneBook/phoneBook-actions';
 import PropTypes from 'prop-types';
 import styles from './ContactListItem.module.css';
 

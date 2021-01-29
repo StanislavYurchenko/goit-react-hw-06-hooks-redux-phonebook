@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from '../../redux/phoneBook/phoneBook-actions';
+import { addContact } from 'redux/phoneBook/phoneBook-actions';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
-import { getContacts } from '../../redux/phoneBook/phoneBook-selectors';
+import { getContacts } from 'redux/phoneBook/phoneBook-selectors';
 import styles from './ContactForm.module.css';
 
 function ContactForm() {
